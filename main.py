@@ -187,7 +187,10 @@ class User:
                 break  # Exit after item is added
             except ValueError:
                 print("Invalid price. Please enter a valid number.")
+        new_item = Item(name, color, quantity, price)
 
+        # Write the updated inventory to the JSON file
+        inventory.save_inventory()
     def remove_item(self, inventory):
         try:
             if not inventory.items:
@@ -226,6 +229,7 @@ class User:
 
     def check_item_details(self, inventory):
         try:
+            inventory.list_items()
             item_id = int(input("Enter item ID to check details: "))
             if item_id in inventory.items:
                 print(inventory.items[item_id].get_details())
